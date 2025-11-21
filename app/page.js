@@ -1,66 +1,67 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import dynamic from "next/dynamic";
 
-export default function Home() {
+// استيراد المكونات بشكل ديناميكي للأداء أفضل
+const HeroSection = dynamic(() => import("./components/HeroSection"));
+const MatchesSection = dynamic(() => import("./components/MatchesSection"));
+const PlayersSection = dynamic(() => import("./components/PlayersSection"));
+const CelebritiesSection = dynamic(() =>
+  import("./components/CelebritiesSection")
+);
+const AchievementsSection = dynamic(() =>
+  import("./components/AchievementsSection")
+);
+import Footer from "./components/Footer";
+
+let datplayers = [];
+let datMatchFcB = [];
+export default async function Home() {
+  try {
+    const responseMatch = await fetch(
+      "https://api.football-data.org/v4/teams/81/matches?status=SCHEDULED",
+      {
+        headers: {
+          "X-Auth-Token": "eb8f6e61d5d84618a8b3201bcc5ecb07",
+        },
+        next: {
+          revalidate: 18000, // ✅ 5 ساعات
+        },
+      }
+    );
+
+    if (responseMatch.ok) {
+      datMatchFcB = await responseMatch.json();
+    }
+  } catch (error) {
+    console.error("Error fetching players data:", error);
+    datMatchFcB = []; // ✅ بيانات افتراضية في حالة الخطأ
+  }
+
+  try {
+    const response = await fetch(
+      "https://api-fcb.pulselive.com/content/fcbarcelona/bio/fr",
+      {
+        next: {
+          revalidate: 90 * 24 * 60 * 60, // ✅ 3 أشهر = 7,776,000 ثانية
+        },
+      }
+    );
+
+    if (response.ok) {
+      datplayers = await response.json();
+    }
+  } catch (error) {
+    console.error("Error fetching players data:", error);
+    datplayers = []; // ✅ بيانات افتراضية في حالة الخطأ
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50">
+      <HeroSection />
+      <MatchesSection datMatchFcB={datMatchFcB} />
+      <PlayersSection datplayers={datplayers} />
+      <CelebritiesSection />
+      <AchievementsSection />
+      <Footer />
+    </main>
   );
 }
