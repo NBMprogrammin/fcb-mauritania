@@ -5,6 +5,7 @@ import { getArabicTimeRemaining } from '../utils/dateUtils';
 export default function MatchesSection(datmatchfcballs) {
   const [nextMatchTime, setNextMatchTime] = useState({});
   
+  
   useEffect(() => {
     // محاكاة بيانات المباراة القادمة
     const matchDate = new Date(datmatchfcballs.datMatchFcB.matches[0].utcDate);
@@ -44,8 +45,17 @@ export default function MatchesSection(datmatchfcballs) {
             <CountdownUnit value={nextMatchTime.minutes} label="دقائق" />
             <CountdownUnit value={nextMatchTime.seconds} label="ثواني" />
           </div>
-          <div className="text-xl">
-            🆚 برشلونة vs ريال مدريد - الدوري الإسباني
+          <div style={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '10px'
+           }}
+          >
+            {/* 🆚 برشلونة vs ريال مدريد - الدوري الإسباني */}
+            {datmatchfcballs.datMatchFcB.matches[0].homeTeam.name}
+            <img style={{ width: '35px', height: '35px' }} src={datmatchfcballs.datMatchFcB.matches[0].competition.emblem} alt="" />
+            {datmatchfcballs.datMatchFcB.matches[0].awayTeam.name}
           </div>
         </div>
 
@@ -75,7 +85,7 @@ const CountdownUnit = ({ value, label }) => {
 const MatchCard = ({ match }) => {
   return (
     <div className="boxtoshowdatmatch hover:-translate-y-2">
-      <div className="p-6">
+      <div style={{ padding: '16px 12px' }}>
         {/* الفريقان */}
         <div className="flex justify-between items-center mb-6">
           <div className="text-center">

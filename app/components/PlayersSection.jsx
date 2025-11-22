@@ -6,7 +6,16 @@ export default function PlayersSection({datplayers}) {
 
   const scrollToSlide = (direction) => {
     const slider = sliderRef.current;
-    const cardWidth = 440; // عرض الكارد + الـ gap
+    // let scrollAmount;
+    
+    // if (window.innerWidth <= 300) {
+    //   scrollAmount = direction === 'next' ? '100%' : '-100%'; // 200 + 16
+    // } else if (window.innerWidth <= 450) {
+    //   scrollAmount = direction === 'next' ? 320 : -320; // 300 + 20
+    // } else {
+    //   scrollAmount = direction === 'next' ? 440 : -440; // 440 + 24
+    // }
+    const cardWidth = slider.querySelector('.celebrity-card').offsetWidth + 24; // عرض الكارد + الـ gap
     const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
     
     slider.scrollBy({
@@ -60,7 +69,7 @@ export default function PlayersSection({datplayers}) {
               {datplayers ? datplayers.content.map((player) => (
                 <div 
                   key={player.id} 
-                  className="flex-shrink-0 w-100 snap-center" // عرض ثابت للكارد
+                  className="flex-shrink-0 w-100 snap-center celebrity-card" // عرض ثابت للكارد
                 >
                   <PlayerCard player={player} />
                 </div>
@@ -73,11 +82,11 @@ export default function PlayersSection({datplayers}) {
   }
 }
 
-function PlayerCard({ player }) {
+const PlayerCard = ({ player }) => {
   return (
-    <div style={{ height: '400px', background: '#3F51B5' }} className="group cardSatPayle relative bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-400 transform ">
+    <div className="group cardSatPayle relative bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-400 transform ">
       {/* صورة اللاعب */}
-      <div className="relative h-100 overflow-hidden">
+      <div className="cardpayshowdat relative h-100 overflow-hidden">
         <img 
           src={player.headshot.imageUrl ? player.headshot.imageUrl : 'https://www.fcbarcelona.com/resources/v3.3.2-7537/i/elements/default-player-large.png'} 
           alt={player.title}
@@ -87,7 +96,7 @@ function PlayerCard({ player }) {
         {/* الإحصائيات */}
         <div className='stlcardsf'>
           <div className='stlnameandmbrplay'>
-            <div className='numberpaley'>{player.metadata?.['shirt-number']}</div>
+            <div className='numberpaley'>{player.metadata?.['shirt-number'] ? player.metadata?.['shirt-number'] : '0'}</div>
             <div className='text-right'>
               <h3 className="text-lg font-bold text-green-900 mb-1" style={{ color: '#fff' }}>{player.title}</h3>
               <p className="text-gray-600 text-sm" style={{ color: '#fff' }}>{player.position}</p>

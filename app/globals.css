@@ -187,7 +187,7 @@ body {
 }
 
 .titelpage {
-  font-size: 80px !important;
+  font-size: 68px !important;
   height: 200px;
 }
 .logoweb {
@@ -223,11 +223,13 @@ body {
   color: var(--with-color) !important;
 }
 
-.cardSatPayle:hover .stlcardsf {
-  bottom: -0%;
+.cardSatPayle {
+  background-color: var(--splmre-color);
+  height: 400px;
 }
 
-.cardSatPayle:focus .stlcardsf {
+.cardSatPayle:focus .stlcardsf,
+.cardSatPayle:hover .stlcardsf {
   bottom: -0%;
 }
 
@@ -235,6 +237,10 @@ body {
   display: flex;
   justify-content: center;
   gap: 12px;
+}
+
+.cardusersplfcb {
+  width: 320px;
 }
 
 .stlbtntymtomatch {
@@ -282,6 +288,8 @@ body {
   width: 31%;
 }
 
+.cardpayshowdat:focus .imgcardpale,
+.cardSatPayle:focus .imgcardpale,
 .cardSatPayle:hover .imgcardpale {
   scale: 100px;
 }
@@ -298,10 +306,12 @@ body {
   gap: 5px;
 }
 
-.titelmrandfls {
-  position: relative;
-  display: flex;
-  justify-content: center;
+.flslogoformrtitel {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: -1px;
+  left: -13%;
 }
 
 .noddatdevT {
@@ -506,6 +516,13 @@ body {
     width: 500px;
     margin-inline: auto;
   }
+
+  .flslogoformrtitel {
+    width: 50px;
+    height: 50px;
+    top: -1px;
+    left: -16%;
+  }
 }
 
 /* استجابة للهواتف */
@@ -541,6 +558,12 @@ body {
     width: 880px !important;
     margin-inline: auto;
   }
+  .flslogoformrtitel {
+    width: 50px;
+    height: 50px;
+    top: -1px;
+    left: -18%;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -561,6 +584,13 @@ body {
     margin-inline: auto;
     height: 90px;
   }
+  
+  .flslogoformrtitel {
+    width: 40px;
+    height: 40px;
+    top: -1px;
+    left: -21%;
+  }
 }
 
 @media (max-width: 701px) {
@@ -569,6 +599,13 @@ body {
     width: 500px !important;
     margin-inline: auto;
     height: 80px;
+  }
+  
+  .flslogoformrtitel {
+    width: 35px;
+    height: 35px;
+    top: 1px;
+    left: -18%;
   }
 
   .timemr {
@@ -593,6 +630,13 @@ body {
     font-size: 40px !important;
     width: 415px !important;
     height: 90px;
+  }
+  
+  .flslogoformrtitel {
+    width: 30px;
+    height: 30px;
+    top: 1px;
+    left: -17%;
   }
 
   .timemr {
@@ -690,11 +734,26 @@ body {
     font-size: 28px !important;
     margin-top: 20px;
   }
+  
+  .flslogoformrtitel {
+    width: 30px;
+    height: 20px;
+    top: 1px;
+    left: -26%;
+  }
 
   .stlbtntymtomatch {
     width: 50px !important;
     height: 50px !important;
     font-size: 25px;
+  }
+
+  .cardSatPayle {
+    width: 400px;
+  }
+
+  .cardusersplfcb {
+    width: 100%;
   }
 }
 

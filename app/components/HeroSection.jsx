@@ -53,15 +53,13 @@ export default function HeroSection() {
         <h1 className="titelpage">
           {displayText}
           {displayText.length === fullText.length && (
-            <div className='titelmrandfls'>
+            <span className='relative'>
               <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent animate-pulse">
                 موريتانيا
               </span>
-                <img style={{ 
-                  width: '40px',
-                  height: '40px'
-                 }} src="https://img.freepik.com/premium-photo/national-flag-palestine-background-with-flag-palestine_659987-34798.jpg" alt="" />
-            </div>
+                <img className='flslogoformrtitel'
+                 src="https://img.freepik.com/premium-photo/national-flag-palestine-background-with-flag-palestine_659987-34798.jpg" alt="" />
+            </span>
           )}
         </h1>
 
@@ -153,7 +151,7 @@ const IndependenceCounter = () => {
   );
 }
 
-function TimeUnit({ value, label }) {
+const TimeUnit = ({ value, label }) => {
   return (
     <div className="text-center">
       <div className="bg-white text-green-900 rounded-lg py-2 px-3 text-2xl font-bold min-w-[60px]">
