@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 let datplayers = [];
 let datMatchFcB = [];
 export default async function Home() {
+  // Her Start Get Data Match Clup
   try {
     const responseMatch = await fetch(
       "https://api.football-data.org/v4/teams/81/matches?status=SCHEDULED",
@@ -24,6 +25,7 @@ export default async function Home() {
         },
         next: {
           revalidate: 18000, // ✅ 5 ساعات
+          revalidate: 600, // ✅  10 دقايق
         },
       }
     );
@@ -34,8 +36,9 @@ export default async function Home() {
   } catch (error) {
     console.error("Error fetching players data:", error);
     datMatchFcB = []; // ✅ بيانات افتراضية في حالة الخطأ
-  }
+  } //== End Get Data Match Clup ==//
 
+  // Start Get Data Players For Fc Barcelone
   try {
     const response = await fetch(
       "https://api-fcb.pulselive.com/content/fcbarcelona/bio/fr",
@@ -52,7 +55,7 @@ export default async function Home() {
   } catch (error) {
     console.error("Error fetching players data:", error);
     datplayers = []; // ✅ بيانات افتراضية في حالة الخطأ
-  }
+  } //== End Get Data Players For Fc Barcelone ==//
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50">
