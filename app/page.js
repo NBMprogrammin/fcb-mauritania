@@ -24,7 +24,7 @@ export default async function Home() {
           "X-Auth-Token": "eb8f6e61d5d84618a8b3201bcc5ecb07",
         },
         next: {
-          revalidate: 18000, // ✅ 5 ساعات
+          // revalidate: 18000, // ✅ 5 ساعات
           revalidate: 600, // ✅  10 دقايق
         },
       }
